@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace toDoApi.Models
+namespace rflap_metrics.Models
 {
     public class TestContext : DbContext
     {
