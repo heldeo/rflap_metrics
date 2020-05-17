@@ -10,7 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-
+using Microsoft.EntityFrameworkCore;
+using rflap_metrics.Models;
 namespace rflap_metrics
 {
     public class Startup
@@ -25,6 +26,9 @@ namespace rflap_metrics
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ExportContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TestAndExportContext")));
+            services.AddDbContext<TestContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TestAndExportContext")));
+            services.AddDbContext<TestResultContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TestAndExportContext")));
             services.AddControllers();
         }
 
