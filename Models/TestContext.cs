@@ -9,6 +9,6 @@ namespace rflap_metrics.Models
         {
         }
 
-        public DbSet<TestContext> Test { get; set; }
+        public DbSet<Test> Test { get; set; }
     }
 }

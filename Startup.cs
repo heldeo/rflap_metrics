@@ -26,9 +26,11 @@ namespace rflap_metrics
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ExportContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TestAndExportContext")));
-            services.AddDbContext<TestContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TestAndExportContext")));
-            services.AddDbContext<TestResultContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TestAndExportContext")));
+            string connectionString = "Server=tcp:rflap-metrics.database.windows.net,1433;Initial Catalog=submissions_and_tests;Persist Security Info=False;User ID=heldeo;Password=1Tegarde;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+
+            services.AddDbContext<ExportContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<TestContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<TestResultContext>(options => options.UseSqlServer(connectionString));
             services.AddControllers();
         }
 
