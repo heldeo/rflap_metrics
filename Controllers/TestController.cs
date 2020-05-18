@@ -29,7 +29,7 @@ namespace rflap_metrics.Controllers
 
         // GET: api/Test/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Test>> GetTest(string id)
+        public async Task<ActionResult<Test>> GetTest(int id)
         {
             var test = await _context.Test.FindAsync(id);
 
@@ -45,9 +45,9 @@ namespace rflap_metrics.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTest(string id, Test test)
+        public async Task<IActionResult> PutTest(int id, Test test)
         {
-            if (id != test.sessionID)
+            if (id != test.dataID)
             {
                 return BadRequest();
             }
@@ -80,28 +80,14 @@ namespace rflap_metrics.Controllers
         public async Task<ActionResult<Test>> PostTest(Test test)
         {
             _context.Test.Add(test);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (TestExists(test.sessionID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTest", new { id = test.sessionID }, test);
+            return CreatedAtAction("GetTest", new { id = test.dataID }, test);
         }
 
         // DELETE: api/Test/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Test>> DeleteTest(string id)
+        public async Task<ActionResult<Test>> DeleteTest(int id)
         {
             var test = await _context.Test.FindAsync(id);
             if (test == null)
@@ -115,9 +101,9 @@ namespace rflap_metrics.Controllers
             return test;
         }
 
-        private bool TestExists(string id)
+        private bool TestExists(int id)
         {
-            return _context.Test.Any(e => e.sessionID == id);
+            return _context.Test.Any(e => e.dataID == id);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace rflap_metrics.Models
         public TestContext(DbContextOptions<TestContext> options)
             : base(options)
         {
-        }
+         }
 
         public DbSet<Test> Test { get; set; }
     }

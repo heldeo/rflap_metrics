@@ -12,10 +12,15 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using rflap_metrics.Models;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 namespace rflap_metrics
 {
     public class Startup
     {
+
+            public readonly string RflapOrigins = "Rflap Origins";
+
+            public readonly string connectionString = "Server=tcp:rflap-metrics.database.windows.net,1433;Initial Catalog=submissions_and_tests_2020-05-16T02-20Z;Persist Security Info=False;User ID=heldeo;Password=1Tegarde;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,11 +31,22 @@ namespace rflap_metrics
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = "Server=tcp:rflap-metrics.database.windows.net,1433;Initial Catalog=submissions_and_tests;Persist Security Info=False;User ID=heldeo;Password=1Tegarde;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-
-            services.AddDbContext<ExportContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<ExportContext>(options => options.UseSqlServer(connectionString, options => options.EnableRetryOnFailure()));
             services.AddDbContext<TestContext>(options => options.UseSqlServer(connectionString));
             services.AddDbContext<TestResultContext>(options => options.UseSqlServer(connectionString));
+            services.AddCors(options =>
+           {
+               options.AddDefaultPolicy(
+                          builder =>
+                         {
+                             builder.WithOrigins("https://rflap.azurewebsites.net",
+                                                            "https://rflap.acmuic.app").AllowAnyMethod().AllowAnyHeader();
+
+
+                         });
+
+
+           });
             services.AddControllers();
         }
 
@@ -41,12 +57,13 @@ namespace rflap_metrics
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseHttpsRedirection();
-
             app.UseRouting();
+            // UseCors must be after routing but prior to authorization
+            app.UseCors();
 
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

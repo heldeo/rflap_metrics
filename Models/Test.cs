@@ -8,11 +8,12 @@ using System;
 [Table("Test")]
 public class Test{
     [Key]
+    public int dataID{ get; set; }
     public string sessionID { get; set; } 
         //In javascript Date object notation, TODO: Convert into SQL date time 
     public DateTime startTime { get; set; } 
     //In javascript Date object notation, TODO: Convert into SQL date time   
-    public DateTime testTime { get; set; }
+    public string testTime { get; set; }
     // in JSON structure: create class to deserialize all the indices
     public string rustPacket { get; set; }
     public string mode { get; set; }
