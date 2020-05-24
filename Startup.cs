@@ -64,7 +64,7 @@ namespace rflap_metrics
 
             app.UseAuthorization();
 
-
+        
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
