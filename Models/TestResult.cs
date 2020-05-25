@@ -5,7 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 [Table("TestResult")]
 public class TestResult{
     [Key]
-    public string dataID { get; set;  }
+    public int baseID { get; set; }
+    // public int dataID { get; set;  }
     public string sessionID { get; set;} 
     public string testID{ get; set;} 
         //In javascript Date object notation, TODO: Convert into SQL date time 

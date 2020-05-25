@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using rflap_metrics.Models;
 
 namespace rflap_metrics.Migrations.TestResult
 {
     [DbContext(typeof(TestResultContext))]
-    partial class TestResultContextModelSnapshot : ModelSnapshot
+    [Migration("20200525164313_TestResultUpdate")]
+    partial class TestResultUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

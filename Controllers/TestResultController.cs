@@ -29,7 +29,7 @@ namespace rflap_metrics.Controllers
 
         // GET: api/TestResult/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TestResult>> GetTestResult(string id)
+        public async Task<ActionResult<TestResult>> GetTestResult(int id)
         {
             var testResult = await _context.TestResult.FindAsync(id);
 
@@ -45,9 +45,9 @@ namespace rflap_metrics.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTestResult(string id, TestResult testResult)
+        public async Task<IActionResult> PutTestResult(int id, TestResult testResult)
         {
-            if (id != testResult.dataID)
+            if (id != testResult.baseID)
             {
                 return BadRequest();
             }
@@ -86,7 +86,7 @@ namespace rflap_metrics.Controllers
             }
             catch (DbUpdateException)
             {
-                if (TestResultExists(testResult.dataID))
+                if (TestResultExists(testResult.baseID))
                 {
                     return Conflict();
                 }
@@ -96,12 +96,12 @@ namespace rflap_metrics.Controllers
                 }
             }
 
-            return CreatedAtAction("GetTestResult", new { id = testResult.dataID }, testResult);
+            return CreatedAtAction("GetTestResult", new { id = testResult.baseID }, testResult);
         }
 
         // DELETE: api/TestResult/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<TestResult>> DeleteTestResult(string id)
+        public async Task<ActionResult<TestResult>> DeleteTestResult(int id)
         {
             var testResult = await _context.TestResult.FindAsync(id);
             if (testResult == null)
@@ -115,9 +115,9 @@ namespace rflap_metrics.Controllers
             return testResult;
         }
 
-        private bool TestResultExists(string id)
+        private bool TestResultExists(int id)
         {
-            return _context.TestResult.Any(e => e.dataID == id);
+            return _context.TestResult.Any(e => e.baseID == id);
         }
     }
 }

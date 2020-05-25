@@ -126,3 +126,8 @@
 /home/chris/relativity/rflap_metrics/bin/Debug/netcoreapp3.1/runtimes/win/lib/netcoreapp2.0/System.Runtime.Caching.dll
 /home/chris/relativity/rflap_metrics/bin/Debug/netcoreapp3.1/runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll
 /home/chris/relativity/rflap_metrics/obj/Debug/netcoreapp3.1/rflap_metrics.csproj.CopyComplete
+/home/chris/relativity/rflap_metrics/bin/Debug/netcoreapp3.1/out/web.config
+/home/chris/relativity/rflap_metrics/bin/Debug/netcoreapp3.1/out/appsettings.Development.json
+/home/chris/relativity/rflap_metrics/bin/Debug/netcoreapp3.1/out/appsettings.json
+/home/chris/relativity/rflap_metrics/bin/Debug/netcoreapp3.1/out/rflap_metrics.deps.json
+/home/chris/relativity/rflap_metrics/bin/Debug/netcoreapp3.1/out/rflap_metrics.runtimeconfig.json
